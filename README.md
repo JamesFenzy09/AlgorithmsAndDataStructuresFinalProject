@@ -59,5 +59,5 @@ You are required to provide error checking and show appropriate messages in the 
 inputs – eg bus stop doesn’t exist, wrong format for time for bus stop (eg letters instead of
 numbers), no route possible etc.
 
-##Does it work as it should?
+## Does it work as it should?
 To save you time from testing it yourself, does it work? Yes
