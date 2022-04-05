@@ -1,7 +1,7 @@
 # AlgorithmsAndDataStructuresFinalProject
 - This is my end of year final project for Algorithms and data Structures 2
 - All done by James Fenlon
-- 
+
 ## What is the project?
 - In little words this project is all in java. It involves creating a user interface to navigate between the three different functions as listed below.
   - Return all bus stop information from a time specified by the user in 24 hour format
