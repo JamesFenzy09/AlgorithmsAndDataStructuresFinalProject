@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class ternarySearchTree {
 
     public static void main(String[] args) throws IOException {
+        // Trie trie = new Trie();
         Scanner scan = new Scanner(System.in);
         String stopsFile = "./TextFiles/stops.txt";
         int stopsFileSize = arraySize(stopsFile);
@@ -23,8 +24,56 @@ public class ternarySearchTree {
                 .println(switcharoo(fullGrid(textTo2D(stopsFile, stopsFileSize), stopsFileSize),
                         stopsFileSize)[8744][2]);
 
-        System.out.println("Please enter part of, or the full bus stop name you're looking for");
-        scan.nextLine();
+        String[][] fullFinalGrid = switcharoo(fullGrid(textTo2D(stopsFile, stopsFileSize), stopsFileSize),
+                stopsFileSize);
+        // addToTree(trie, fullFinalGrid, stopsFileSize);
+        String answer = "";
+        TernarySearchTrie tst = new TernarySearchTrie(stopsFile);
+        System.out.print(
+                "Please enter the bus stop's full name or by the first few characters in the name: ");
+        String userInput = scan.nextLine();
+        userInput = userInput.toUpperCase();
+        tst.getStopInformation(userInput).forEach((info) -> {
+            System.out.println(info);
+        });
+        // boolean anotherSearch = true;
+        // while (anotherSearch) {
+        // System.out.println("Please enter part of, or the full bus stop name you're
+        // looking for");
+        // answer = scan.nextLine();
+        // if (trie.search(answer)) {
+        // System.out.println("Hooray, there is a bus stop that mathces your exact
+        // request!");
+        // }
+        // // System.out.println(trie.startsWith(answer, stopsFileSize)[1]);
+        // else if (trie.startsWith(answer)) {
+        // System.out.println(
+        // "Unfortunately there is no bus stops that match your exact search however
+        // here are the stops that match what you entered");
+        // } else {
+        // System.out.println("Nothing matches what you entered loser");
+        // }
+        // boolean valid = false;
+        // System.out.println("number of runs: " + trie.startsWithCounter(answer));
+        // while (!valid) {
+        // System.out.println("Do you want to make another stop search?('yes' or
+        // 'no')");
+        // answer = scan.nextLine();
+        // answer = answer.toLowerCase();
+        // if (answer.equals("no")) {
+        // anotherSearch = false;
+        // valid = true;
+        // System.out.println("Not a problem! Have a nice day");
+        // System.exit(1);
+        // } else if (answer.equals("yes")) {
+        // anotherSearch = true;
+        // valid = true;
+        // } else if (!answer.equals("no") || !answer.equals("yes")) {
+        // System.out.println("Sorry that was not a valid entry, try again!");
+        // valid = false;
+        // }
+        // }
+        // }
     }
 
     static int arraySize(String filename) throws IOException {
@@ -113,4 +162,11 @@ public class ternarySearchTree {
         }
         return grid;
     }
+
+    // static String[][] addToTree(Trie trie, String[][] grid, int size) {
+    // for (int i = 0; i < size; i++) {
+    // trie.insert(grid[i][2]);
+    // }
+    // return null;
+    // }
 }
