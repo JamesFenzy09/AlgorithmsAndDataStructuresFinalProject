@@ -1,3 +1,5 @@
+package Java;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -74,6 +76,18 @@ public class ternarySearchTree {
         // }
         // }
         // }
+    }
+
+    public static String finalMain(String userInput, String stopsFile) throws IOException {
+        TernarySearchTrie tst = new TernarySearchTrie(stopsFile);
+        String finalAnswer = "";
+        String poop = "";
+        List<String> poo = new LinkedList<>();
+        poo = tst.getStopInformation(userInput);
+        for (int i = 0; i < poo.size(); i++) {
+            finalAnswer = finalAnswer + poo.get(i) + "\n";
+        }
+        return finalAnswer;
     }
 
     static int arraySize(String filename) throws IOException {

@@ -37,29 +37,37 @@ public class DijkstraAlgorithm {
         setupGraph(STOPS, STOP_TIMES, TRANSFERS);
     }
 
-    public static void printShortestPathInfo(int start, int destination) {
+    public static String printShortestPathInfo(int start, int destination) {
         ArrayList<Integer> shortestPath = routes.getShortestPath(start, destination);
         double shortestCost = routes.getShortestPathCost();
+        String finalAnswer = "";
 
         if (shortestCost == Double.POSITIVE_INFINITY) {
             System.out.println("No route from from " + start + " to " + destination);
+            finalAnswer = "No route from from " + start + " to " + destination;
         } else if (shortestCost == Double.NEGATIVE_INFINITY) {
             System.out.println("both are same");
+            finalAnswer = "both are same";
         } else if (shortestCost == -1.0) {
             System.out.println("Invalid input");
+            finalAnswer = "Invalid input";
         } else {
             System.out.println("Cost from " + start + " to " + destination + " is: " + shortestCost);
-
             System.out.println("\nThe quickest route you can from Stop ID " + start + " to Stop ID " + destination
                     + " is to travel ion the following order! \n");
+            finalAnswer = "\nThe quickest route you can from Stop ID " + start + " to Stop ID " + destination
+                    + " is to travel in the following order! \n";
             for (int i = 0; i < shortestPath.size(); i++) {
                 System.out.print(shortestPath.get(i));
+                finalAnswer = finalAnswer + shortestPath.get(i);
                 if (i != shortestPath.size() - 1) {
                     System.out.print(" -> ");
+                    finalAnswer = finalAnswer + " -> ";
                 }
             }
             System.out.println();
         }
+        return finalAnswer;
     }
 
     public static void part1GUI() throws IOException {
@@ -96,6 +104,40 @@ public class DijkstraAlgorithm {
             System.out.println("Sorry bro, no such stop combination! Please try again!");
         }
 
+    }
+
+    public static String dijkstraMain(String input) throws IOException {
+        String stops_times_path = "./TextFiles/stop_times.txt";
+        File stop_times = new File(stops_times_path);
+
+        String stops_path = "./TextFiles/stops.txt";
+        File stops = new File(stops_path);
+
+        String transfers_path = "./TextFiles/transfers.txt";
+        File transfers = new File(transfers_path);
+
+        setupGraph(stops, stop_times, transfers);
+
+        String[] arr = input.split(",");
+        int fromStopID = Integer.parseInt(arr[0]);
+        int toStopID = Integer.parseInt(arr[1]);
+
+        String finalAnswer = "";
+        if (routes.isValidStopId(fromStopID) && routes.isValidStopId(toStopID)) {
+            finalAnswer = "Inputs start stop - " + arr[0] + " dest stop - " + arr[1];
+            finalAnswer = finalAnswer + printShortestPathInfo(fromStopID, toStopID);
+            double shortestCost = routes.getShortestPathCost();
+            ArrayList<Integer> shortestPath = routes.getShortestPath(fromStopID, toStopID);
+            routes.getEnrouteStops(shortestPath);
+            finalAnswer = finalAnswer + routes.routePlanner(shortestPath);
+            System.out.println("\nThe cost associated with moving from " + fromStopID + " to " + toStopID
+                    + " is " + shortestCost);
+            finalAnswer = finalAnswer + "\nThe cost associated with moving from " + fromStopID + " to " + toStopID
+                    + " is " + shortestCost;
+        } else {
+            return "Sorry, no such stop combination! Please try again! In the format 'stop1,stop2' plan your journey!";
+        }
+        return finalAnswer;
     }
 
     public static void main(String[] args) throws IOException {

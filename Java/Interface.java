@@ -1,3 +1,4 @@
+package Java;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -44,9 +45,9 @@ public class Interface {
    String stopTimes = "./TextFiles/stop_times.txt";
    String transfers = "./TextFiles/transfers.txt";
 
-   // ShortestPath sp = new ShortestPath(stops,transfers,stopTimes);
+   DijkstraAlgorithm sp = new DijkstraAlgorithm(stops, transfers, stopTimes);
 
-   // TST tit = new TST(stops);
+   ternarySearchTree tst = new ternarySearchTree();
 
    final static String BUTTONPANEL = "Card with JButtons";
    final static String TEXTPANEL = "Card with JTextField";
@@ -232,14 +233,13 @@ public class Interface {
          public void actionPerformed(ActionEvent e) {
             // your actions
             String text = textField.getText();
+            try {
+               String result = "";
+               result = sp.dijkstraMain(text);
 
-            String result = "";// sp.output(text,stopTimes);
-
-            textArea1.setText(result);
-
-            // String result = sp.output(from, to);
-
-            // textArea1.setText(result);
+               textArea1.setText(result);
+            } catch (IOException a) {
+            }
          }
       });
       text1.add(submit);
@@ -272,9 +272,15 @@ public class Interface {
          public void actionPerformed(ActionEvent e) {
             // your actions
             String text = textField2.getText();
-            String result = "";// tit.interfaceCall(stops, text);
+            text = text.toUpperCase();
+            String result = "";
+            try {
+               result = tst.finalMain(text, stops);
+            } catch (IOException e1) {
+               // TODO Auto-generated catch block
+            }
 
-            System.out.println(result);
+            // System.out.println(result);
             textArea2.setText(result);
 
          }

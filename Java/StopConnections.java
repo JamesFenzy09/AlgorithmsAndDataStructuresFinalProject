@@ -271,4 +271,20 @@ public class StopConnections {
         }
         return enrouteStopDetails;
     }
+
+    public static String routePlanner(ArrayList<Integer> stopIDs) {
+        ArrayList<Stop> enrouteStopDetails = new ArrayList<>();
+        String finalAnswer = "";
+        System.out.println("\nView your full route details here:");
+        finalAnswer = "\nView your full route details here:\n";
+        for (int stop : stopIDs) {
+            Stop stopDetails = IdDetailsMap.get(stop);
+            // stopDetails.printStopDetails();
+            System.out.println("Stop ID - " + stopDetails.stopID + "\t Stop Name - " + stopDetails.stopName);
+            enrouteStopDetails.add(stopDetails);
+            finalAnswer = finalAnswer + "Stop ID - " + stopDetails.stopID + "\t\t Stop Name - " + stopDetails.stopName
+                    + "\n";
+        }
+        return finalAnswer;
+    }
 }
