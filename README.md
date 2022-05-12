@@ -61,4 +61,4 @@ inputs – eg bus stop doesn’t exist, wrong format for time for bus stop (eg l
 numbers), no route possible etc.
 
 ## Does it work as it should?
-To save you time from testing it yourself, does it work? Yes
+To save you time from testing it yourself, does it work? Yes, I got 100% for this project
